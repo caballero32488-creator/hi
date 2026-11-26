@@ -116,9 +116,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable fun SettingsScreen() {
-    fun s(label: String, v: Float, r: ClosedFloatingPointRange<Float>, set: (Float) -> Unit, fmt: String = "%.2f") {
+        @Composable fun s(label: String, v: Float, r: ClosedFloatingPointRange<Float>, set: (Float) -> Unit, fmt: String = "%.2f") {
         Text("$label: ${fmt.format(v)}"); Slider(v, { set(it); Cfg.save() }, valueRange = r) }
-    fun sw(label: String, v: Boolean, set: (Boolean) -> Unit) = Row(verticalAlignment = Alignment.CenterVertically) {
+        @Composable fun sw(label: String, v: Boolean, set: (Boolean) -> Unit) = Row(verticalAlignment = Alignment.CenterVertically) {
         Text(label, Modifier.weight(1f)); Switch(v, { set(it); Cfg.save() }) }
     LazyColumn { item { Text("Settings", style = MaterialTheme.typography.titleLarge)
         Card2 { Text("Recording", color = Accent)
