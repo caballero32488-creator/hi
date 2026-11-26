@@ -10,8 +10,12 @@ jobs:
       - uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: 8.9 }
-      - run: gradle assembleDebug --no-daemon
+      - name: Build
+        run: |
+          DIR=$(dirname "$(find . -name settings.gradle.kts | head -1)")
+          echo "Project dir: $DIR"; ls "$DIR"
+          cd "$DIR" && gradle assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: TinyMacro-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: "**/build/outputs/apk/debug/*.apk"
